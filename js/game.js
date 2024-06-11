@@ -22,9 +22,9 @@ const fetchData = async () => {
 };
 
 const start = () => {
+  showQuestion();
   loader.style.display = "none";
   container.style.display = "block";
-  showQuestion();
 };
 
 const showQuestion = () => {
@@ -38,10 +38,19 @@ const showQuestion = () => {
   });
 };
 
-const checkAnswer = () => {};
+const checkAnswer = (event, index) => {
+  const isCorrect = index === correctAnswer ? true : false;
+
+  if (isCorrect) {
+    event.target.classList.add("correct");
+  } else {
+    event.target.classList.add("incorrect");
+    answerList[correctAnswer].classList.add("correct");
+  }
+};
 
 window.addEventListener("load", fetchData);
 
 answerList.forEach((button, index) => {
-  button.addEventListener("click", checkAnswer);
+  button.addEventListener("click", (event) => checkAnswer(event, index));
 });
