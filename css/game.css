@@ -1,5 +1,5 @@
 #loader {
-  display: none;
+  display: inline-block;
   width: 100px;
   height: 100px;
   border: 7px solid #6757d9;
@@ -20,7 +20,7 @@
 }
 
 #container {
-  display: block;
+  display: none;
   width: 700px;
 }
 
