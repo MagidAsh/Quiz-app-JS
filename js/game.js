@@ -5,6 +5,8 @@ const container = document.getElementById("container");
 const questionText = document.getElementById("question-text");
 const answerList = document.querySelectorAll(".answer-text");
 const scoreText = document.getElementById("score");
+const nextButton = document.getElementById("next-button");
+const questionNumber = document.getElementById("question-number");
 
 const CORRECT_BONUS = 10;
 
@@ -33,6 +35,8 @@ const start = () => {
 };
 
 const showQuestion = () => {
+  questionNumber.innerText = questionIndex + 1;
+
   const { question, answers, correctAnswerIndex } =
     formattedData[questionIndex];
 
@@ -60,8 +64,29 @@ const checkAnswer = (event, index) => {
   }
 };
 
+const nextHandler = () => {
+  questionIndex++;
+  if (questionIndex < formattedData.length) {
+    isAccepted = true;
+    removeClasses();
+    showQuestion();
+  } else {
+    window.location.assign("/end.html");
+  }
+};
+
+const removeClasses = () => {
+  answerList.forEach((button) => {
+    // button.classList.remove("correct");
+    // button.classList.remove("incorrect");
+    button.className = "answer-text";
+  });
+};
+
 window.addEventListener("load", fetchData);
 
 answerList.forEach((button, index) => {
   button.addEventListener("click", (event) => checkAnswer(event, index));
 });
+
+nextButton.addEventListener("click", nextHandler);
