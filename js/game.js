@@ -1,5 +1,7 @@
 import formatData from "./helper.js";
 
+const level = JSON.parse(localStorage.getItem("level")) || "medium";
+
 const loader = document.getElementById("loader");
 const container = document.getElementById("container");
 const questionText = document.getElementById("question-text");
@@ -11,8 +13,7 @@ const finishButton = document.getElementById("finish-button");
 
 const CORRECT_BONUS = 10;
 
-const URL =
-  "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
+const URL = `https://opentdb.com/api.php?amount=10&difficulty=${level}&type=multiple`;
 
 let formattedData = null;
 let questionIndex = 0;
