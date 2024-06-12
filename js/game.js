@@ -10,6 +10,7 @@ const scoreText = document.getElementById("score");
 const nextButton = document.getElementById("next-button");
 const questionNumber = document.getElementById("question-number");
 const finishButton = document.getElementById("finish-button");
+const error = document.getElementById("error");
 
 const CORRECT_BONUS = 10;
 
@@ -22,12 +23,17 @@ let score = 0;
 let isAccepted = true;
 
 const fetchData = async () => {
-  const response = await fetch(URL);
-  const json = await response.json();
-  //   console.log(json);
-  formattedData = formatData(json.results);
-  start();
-  console.log(formattedData);
+  try {
+    const response = await fetch(URL);
+    const json = await response.json();
+    //   console.log(json);
+    formattedData = formatData(json.results);
+    start();
+    console.log(formattedData);
+  } catch (err) {
+    loader.style.display = "none";
+    error.style.display = "block";
+  }
 };
 
 const start = () => {
